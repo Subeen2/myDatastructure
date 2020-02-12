@@ -1,3 +1,5 @@
+import java.lang.reflect.Array;
+
 public class ArrayBag<T> {
     private int size;
     private int capacity;
@@ -137,6 +139,47 @@ public class ArrayBag<T> {
             }
             this.setSize(this.size()-count);
             return true;
+        }
+
+    }
+
+    public ArrayIterator iterator(){
+        return new ArrayIterator();     //객체 생성
+    }
+
+    public void printArray(){
+        ArrayIterator a = iterator();
+        while(a.hasNext()){
+            System.out.println(a.next());
+        }
+    }
+
+    private class ArrayIterator<T> implements Iterator<T>{
+        private int nextPosition;
+
+        public int nextPosition() {
+            return nextPosition;
+        }
+
+        public void setNextPosition(int nextPosition) {
+            this.nextPosition = nextPosition;
+        }
+
+        private ArrayIterator(){ this.setNextPosition(0);}      //처음부터 탐색해줄거니까 0으로 초기화
+
+        @Override
+        public T next() {
+            if(!this.hasNext()){
+                return null;
+            }else {
+                T nextElement = (T) (ArrayBag.this.elements()[this.nextPosition()]);
+                this.setNextPosition(this.nextPosition() + 1);
+                return nextElement;
+            }
+        }
+
+        public boolean hasNext(){
+            return this.nextPosition()<(ArrayBag.this.size());
         }
 
     }

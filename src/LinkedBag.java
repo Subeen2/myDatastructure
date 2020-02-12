@@ -114,4 +114,51 @@ public class LinkedBag<T> {
         this.setSize(0);
         this.setHead(null);
     }
+
+    public void printNode(){
+        ListIterator a = iterator();
+        while(a.hasNext()){
+            System.out.println(a.next());
+        }
+    }
+
+
+    public ListIterator iterator(){
+        return new ListIterator();
+    }
+
+    private class ListIterator implements Iterator<T> {
+        private LinkedNode<T> nextNode;
+
+        public LinkedNode<T> nextNode() {
+            return nextNode;
+        }
+
+        public void setNextNode(LinkedNode<T> nextNode) {
+            this.nextNode = nextNode;
+        }
+        private ListIterator(){
+            this.nextNode = head;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return this.nextNode()!=null;
+        }
+
+        @Override
+        public T next() {
+            if(!this.hasNext()){
+                return null;
+            }else {
+                T nextElement = this.nextNode.element();
+                this.nextNode = this.nextNode().next();
+                return nextElement;
+            }
+        }
+
+
+
+
+    }
 }
