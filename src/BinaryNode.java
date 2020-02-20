@@ -33,23 +33,22 @@ public class BinaryNode<T> {
         this.setRightChild(null);
     }
 
-    public BinaryNode ( T  givenElement, BinaryNode<T> givenLeftChild, BinaryNode<T> givenRightChild ){
-        this.setElement(givenElement);
-        this.setLeftChild(givenLeftChild);
+    public BinaryNode(T givenElement, BinaryNode<T> givenLeftChild, BinaryNode<T> givenRightChild){
         this.setRightChild(givenRightChild);
-    }
-
-    public boolean hasLeftChild(){
-        return this.leftChild() != null;
+        this.setLeftChild(givenLeftChild);
+        this.setElement(givenElement);
     }
 
     public boolean hasRightChild(){
         return this.rightChild() != null;
     }
 
-    public boolean isLeaf(){
-        return (this.leftChild() == null && this.rightChild() == null);
+    public boolean hasLeftChild(){
+        return this.leftChild()!=null;
     }
 
+    public boolean isLeaf(){ //트리아니고 나뭇가지,,
+        return (this.leftChild()==null && this.rightChild()==null);
+    }
 
 }
